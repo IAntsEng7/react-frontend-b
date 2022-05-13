@@ -8,6 +8,7 @@ class ListEmployeeComponent extends Component {
       employees: [],
     };
     this.addEmployee = this.addEmployee.bind(this); // CreateEmployeeComponent
+    this.editEmployee = this.editEmployee.bind(this); // EditEmployeeComponent
   }
 
   // Called immediately after a component is mounted.
@@ -23,6 +24,11 @@ class ListEmployeeComponent extends Component {
     this.props.history.push("/add-employee");
   }
 
+  // UpdateEmployeeComponent
+  editEmployee(id) {
+    this.props.history.push(`/update-employee/${id}`);
+  }
+
   render() {
     return (
       <div>
@@ -30,7 +36,7 @@ class ListEmployeeComponent extends Component {
         <div className="row">
           <button className="btn btn-primary" onClick={this.addEmployee}>
             {" "}
-            Add Employee
+            Add New Employee
           </button>
         </div>
         <div className="row">
@@ -49,6 +55,14 @@ class ListEmployeeComponent extends Component {
                   <td>{employee.firstName}</td>
                   <td>{employee.lastName}</td>
                   <td>{employee.emailId}</td>
+                  <td>
+                    <button
+                      onClick={() => this.editEmployee(employee.id)}
+                      className="btn btn-info"
+                    >
+                      Update
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>
