@@ -5,7 +5,7 @@ import ListEmployeeComponent from "./components/ListEmployeeComponent";
 import HeaderComponent from "./components/HeaderComponent";
 import FooterComponent from "./components/FooterComponent";
 import CreateEmployeeComponent from "./components/CreateEmployeeComponent";
-import UpdateEmployeeComponent from "./components/UpdateEmployeeComponent";
+// import UpdateEmployeeComponent from "./components/UpdateEmployeeComponent"; // For Create & Update Employee with single React Component
 // import ViewEmployeeComponent from "./components/ViewEmployeeComponent";
 
 function App() {
@@ -18,13 +18,13 @@ function App() {
             <Route path="/" exact component={ListEmployeeComponent}></Route>
             <Route path="/employees" component={ListEmployeeComponent}></Route>
             <Route
-              path="/add-employee"
+              path="/add-employee/:id"
               component={CreateEmployeeComponent}
             ></Route>
-            <Route
+            {/* <Route
               path="/update-employee/:id"
               component={UpdateEmployeeComponent}
-            ></Route>
+            ></Route> For Create & Update Employee with single React Component */}
           </Switch>
         </div>
         <FooterComponent />

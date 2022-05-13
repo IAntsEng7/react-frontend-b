@@ -21,12 +21,12 @@ class ListEmployeeComponent extends Component {
 
   // CreateEmployeeComponent
   addEmployee() {
-    this.props.history.push("/add-employee");
+    this.props.history.push("/add-employee/-1"); // For Create & Update Employee with single React Component
   }
 
   // UpdateEmployeeComponent
   editEmployee(id) {
-    this.props.history.push(`/update-employee/${id}`);
+    this.props.history.push(`/add-employee/${id}`); // For Create & Update Employee with single React Component
   }
 
   render() {

@@ -5,6 +5,7 @@ class CreateEmployeeComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      id: this.props.match.params.id, // step 1.
       firstName: "",
       lastName: "",
       emailId: "",
@@ -13,7 +14,27 @@ class CreateEmployeeComponent extends Component {
     this.changeFirstNameHandler = this.changeFirstNameHandler.bind(this);
     this.changeLastNameHandler = this.changeLastNameHandler.bind(this);
     this.changeEmailIdHandler = this.changeEmailIdHandler.bind(this);
-    this.saveEmployee = this.saveEmployee.bind(this);
+    // step 7-c. change method name
+    this.saveOrUpdateEmployee = this.saveOrUpdateEmployee.bind(this);
+  }
+
+  // step 2.
+  componentDidMount() {
+    // Step 3.
+    if (this.state.id == -1) {
+      // if id isn't exist
+      return;
+    } else {
+      // if id is exist
+      EmployeeService.getEmployeeById(this.state.id).then((res) => {
+        let employee = res.data;
+        this.setState({
+          firstName: employee.firstName,
+          lastName: employee.lastName,
+          emailId: employee.emailId,
+        });
+      });
+    }
   }
 
   changeFirstNameHandler = (event) => {
@@ -28,7 +49,8 @@ class CreateEmployeeComponent extends Component {
     this.setState({ emailId: event.target.value });
   };
 
-  saveEmployee = (e) => {
+  // step 7-a. change method name
+  saveOrUpdateEmployee = (e) => {
     e.preventDefault();
     let employee = {
       firstName: this.state.firstName,
@@ -36,14 +58,34 @@ class CreateEmployeeComponent extends Component {
       emailId: this.state.emailId,
     };
     console.log("employee =>" + JSON.stringify(employee));
-
-    EmployeeService.createEmployee(employee).then((res) => {
-      this.props.history.push("/employees");
-    });
+    // step 4.
+    if (this.state.id == -1) {
+      // if id isn't exist
+      EmployeeService.createEmployee(employee).then((res) => {
+        this.props.history.push("/employees");
+      });
+      return;
+    } else {
+      // if id is exist
+      EmployeeService.updateEmployee(employee, this.state.id).then((res) => {
+        this.props.history.push("/employees");
+      });
+    }
   };
 
   cancel() {
     this.props.history.push("/employees");
+  }
+
+  // step 5. Create or Update
+  getTitle() {
+    if (this.state.id == -1) {
+      // if id isn't exist
+      return <h3 className="text-center"> Add a New Employee</h3>;
+    } else {
+      // if id is exist
+      return <h3 className="text-center"> Update Employee</h3>;
+    }
   }
 
   render() {
@@ -52,7 +94,10 @@ class CreateEmployeeComponent extends Component {
         <div className="container">
           <div className="row">
             <div className="card col-md-6 offset-md-3 offset-md-3">
-              <h3 className="text-center"> Add a New Employee</h3>
+              {/* step 6. */}
+              {/* <h3 className="text-center"> Add a New Employee</h3> */}
+              {/* Create or Update */}
+              {this.getTitle()}
               <div className="card-body">
                 <form>
                   <div className="form-group">
@@ -85,9 +130,10 @@ class CreateEmployeeComponent extends Component {
                       onChange={this.changeEmailIdHandler}
                     />
                   </div>
+                  {/* step 7-b. change method name */}
                   <button
                     className="btn btn-success"
-                    onClick={this.saveEmployee}
+                    onClick={this.saveOrUpdateEmployee}
                   >
                     Save
                   </button>
