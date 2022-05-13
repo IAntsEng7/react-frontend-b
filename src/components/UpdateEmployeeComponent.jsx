@@ -48,10 +48,9 @@ class UpdateEmployeeComponent extends Component {
       emailId: this.state.emailId,
     };
     console.log("employee =>" + JSON.stringify(employee));
-
-    // EmployeeService.createEmployee(employee).then((res) => {
-    //   this.props.history.push("/employees");
-    // });
+    EmployeeService.updateEmployee(employee, this.state.id).then((res) => {
+      this.props.history.push("/employees");
+    });
   };
 
   cancel() {
@@ -101,7 +100,7 @@ class UpdateEmployeeComponent extends Component {
                     className="btn btn-success"
                     onClick={this.updateEmployee}
                   >
-                    Update
+                    Save
                   </button>
                   <button
                     className="btn btn-danger"
