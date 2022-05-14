@@ -21,6 +21,7 @@ class CreateEmployeeComponent extends Component {
   // step 2.
   componentDidMount() {
     // Step 3.
+    // eslint-disable-next-line
     if (this.state.id == -1) {
       // if id isn't exist
       return;
@@ -59,6 +60,7 @@ class CreateEmployeeComponent extends Component {
     };
     console.log("employee =>" + JSON.stringify(employee));
     // step 4.
+    // eslint-disable-next-line
     if (this.state.id == -1) {
       // if id isn't exist
       EmployeeService.createEmployee(employee).then((res) => {
@@ -79,6 +81,7 @@ class CreateEmployeeComponent extends Component {
 
   // step 5. Create or Update
   getTitle() {
+    // eslint-disable-next-line
     if (this.state.id == -1) {
       // if id isn't exist
       return <h3 className="text-center"> Add a New Employee</h3>;
