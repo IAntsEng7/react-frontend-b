@@ -9,6 +9,7 @@ class ListEmployeeComponent extends Component {
     };
     this.addEmployee = this.addEmployee.bind(this); // CreateEmployeeComponent
     this.editEmployee = this.editEmployee.bind(this); // EditEmployeeComponent
+    this.deleteEmployee = this.deleteEmployee.bind(this); // DeleteEmployeeComponent
   }
 
   // Called immediately after a component is mounted.
@@ -27,6 +28,18 @@ class ListEmployeeComponent extends Component {
   // UpdateEmployeeComponent
   editEmployee(id) {
     this.props.history.push(`/add-employee/${id}`); // For Create & Update Employee with single React Component
+  }
+
+  // DeleteEmployeeComponent
+  deleteEmployee(id) {
+    // rest api call
+    EmployeeService.deleteEmployee(id).then((res) => {
+      this.setState({
+        employees: this.state.employees.filter(
+          (employee) => employee.id !== id
+        ),
+      });
+    });
   }
 
   render() {
@@ -61,6 +74,14 @@ class ListEmployeeComponent extends Component {
                       className="btn btn-info"
                     >
                       Update
+                    </button>
+                    <button
+                      // 按鈕的CSS，如果沒有 marginLeft，兩個按鈕會黏在一起。
+                      style={{ marginLeft: "10px" }}
+                      onClick={() => this.deleteEmployee(employee.id)}
+                      className="btn btn-danger"
+                    >
+                      Delete
                     </button>
                   </td>
                 </tr>
