@@ -42,6 +42,11 @@ class ListEmployeeComponent extends Component {
     });
   }
 
+  // ViewEmployeeComponent
+  viewEmployee(id) {
+    this.props.history.push(`/view-employee/${id}`);
+  }
+
   render() {
     return (
       <div>
@@ -77,11 +82,19 @@ class ListEmployeeComponent extends Component {
                     </button>
                     <button
                       // 按鈕的CSS，如果沒有 marginLeft，兩個按鈕會黏在一起。
-                      style={{ marginLeft: "10px" }}
+                      style={{ marginLeft: "9px" }}
                       onClick={() => this.deleteEmployee(employee.id)}
                       className="btn btn-danger"
                     >
                       Delete
+                    </button>
+                    <button
+                      // 按鈕的CSS，如果沒有 marginLeft，兩個按鈕會黏在一起。
+                      style={{ marginLeft: "9px" }}
+                      onClick={() => this.viewEmployee(employee.id)}
+                      className="btn btn-info"
+                    >
+                      View
                     </button>
                   </td>
                 </tr>

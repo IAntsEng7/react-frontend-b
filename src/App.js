@@ -6,7 +6,7 @@ import HeaderComponent from "./components/HeaderComponent";
 import FooterComponent from "./components/FooterComponent";
 import CreateEmployeeComponent from "./components/CreateEmployeeComponent";
 // import UpdateEmployeeComponent from "./components/UpdateEmployeeComponent"; // For Create & Update Employee with single React Component
-// import ViewEmployeeComponent from "./components/ViewEmployeeComponent";
+import ViewEmployeeComponent from "./components/ViewEmployeeComponent";
 
 function App() {
   return (
@@ -23,7 +23,7 @@ function App() {
             ></Route>
             <Route
               path="/view-employee/:id"
-              component={CreateEmployeeComponent}
+              component={ViewEmployeeComponent}
             ></Route>
             {/* <Route
               path="/update-employee/:id"
