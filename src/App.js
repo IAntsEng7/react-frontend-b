@@ -21,6 +21,10 @@ function App() {
               path="/add-employee/:id"
               component={CreateEmployeeComponent}
             ></Route>
+            <Route
+              path="/view-employee/:id"
+              component={CreateEmployeeComponent}
+            ></Route>
             {/* <Route
               path="/update-employee/:id"
               component={UpdateEmployeeComponent}

@@ -66,7 +66,6 @@ class CreateEmployeeComponent extends Component {
       EmployeeService.createEmployee(employee).then((res) => {
         this.props.history.push("/employees");
       });
-      return;
     } else {
       // if id is exist
       EmployeeService.updateEmployee(employee, this.state.id).then((res) => {
